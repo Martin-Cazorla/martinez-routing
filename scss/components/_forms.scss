@@ -1,7 +1,7 @@
 /**
  * @fileoverview Fichero componente de formularios, campos de texto y elementos de control.
- * Asegura el acoplamiento tipográfico, la pasarela de acceso y el blindaje del Design System.
- * @version 3.2.2
+ * Asegura la consistencia cromática, la pasarela de acceso y el blindaje del Design System.
+ * @version 3.2.3
  * @package MartinezRouting.Styles.Components
  */
 
@@ -64,29 +64,32 @@
   }
 }
 
-// Bloques de control e inputs técnicos (Actualizado a versión 3.2.2 con blindaje de abstracts)
-.form-group-panel {
+// Estructura adaptativa para inputs generales del ecosistema SPA (INYECCIÓN VERSIÓN 3.2.3)
+.form-group-panel, .form-group-login {
   display: flex;
   flex-direction: column;
   gap: $space-xs;
-  margin-bottom: $space-md;
+  margin-bottom: $space-xl;
   position: relative;
+  width: 100%;
 
   &__label {
     font-size: rem(13);
     font-weight: 600;
     color: $text-main;
+    letter-spacing: rem(0.2);
   }
 
   &__input {
     background-color: $bg-surface-soft;
     border: 1px solid $border-color;
     border-radius: $radius-md;
-    padding: $space-md;
+    padding: $space-md $space-lg;
     color: $white-smoke;
     font-family: $font-text;
     font-size: rem(14);
     transition: all $motion-fast ease;
+    width: 100%;
 
     &::placeholder {
       color: $text-disabled;

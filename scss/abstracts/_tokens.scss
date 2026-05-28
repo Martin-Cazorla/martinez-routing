@@ -9,7 +9,11 @@ $bg-surface-soft: #1e293b; // Slate 800 (Foco, inputs y elementos interactivos)
 $border-color:    #22314d; // Slate 800 modificado (Contraste sutil en UI oscura)
 $border-focus:    #06b6d4; // Cyan operativo para focus y flotas tácticas
 
-// 2. Tipografía (Jerarquía de colores)
+// 2. Tipografía y Familias de Fuentes Corporativas (CORRECCIÓN CRÍTICA DE COMPILACIÓN)
+$font-headings:   'Manrope', system-ui, -apple-system, sans-serif;
+$font-text:       'Inter', system-ui, -apple-system, sans-serif;
+
+// Jerarquía de colores tipográficos
 $text-main:       #f8fafc; // Slate 50 (Alta legibilidad)
 $text-muted:      #94a3b8; // Slate 400 (Información secundaria)
 $text-disabled:   #475569; // Slate 600

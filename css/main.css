@@ -217,6 +217,12 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 500;
 }
 
+/**
+ * @fileoverview Fichero componente de filtros, badges semánticos y barras de herramientas de alta densidad.
+ * Soluciona obsolescencias de funciones cromáticas de color e integra Dart Sass 3.0.0 de forma estricta.
+ * @version 3.2.2
+ * @package MartinezRouting.Styles.Components
+ */
 .section-header {
   display: flex;
   flex-direction: column;
@@ -280,10 +286,12 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .filter-bar {
-  background-color: #131c2e;
-  border-bottom: 1px solid #22314d;
-  padding: 1rem 1.5rem;
   display: flex;
+  gap: 0.5rem;
+  background-color: #131c2e;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #22314d;
   align-items: center;
 }
 .filter-bar .filter-group {
@@ -295,6 +303,40 @@ body::-webkit-scrollbar-thumb:hover {
   color: #f8fafc;
   font-size: 0.875rem;
   font-weight: 500;
+}
+
+.filter-chip {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all all 0.15s cubic-bezier(0.4, 0, 0.2, 1) ease;
+}
+.filter-chip--blue {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: rgb(107.7609756098, 161.0975609756, 248.2390243902);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.filter-chip--green {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: rgb(20.0597014925, 231.9402985075, 161.7313432836);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.filter-chip--red {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(243.0197044335, 114.9802955665, 114.9802955665);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.filter-chip--purple {
+  background-color: rgba(168, 85, 247, 0.1);
+  color: rgb(192.9269662921, 133.7078651685, 249.2921348315);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+.filter-chip--fire {
+  background-color: rgba(249, 115, 22, 0.1);
+  color: rgb(250.280334728, 144.8744769874, 71.719665272);
+  border: 1px solid rgba(249, 115, 22, 0.2);
 }
 
 .date-picker-custom {
@@ -377,130 +419,97 @@ body::-webkit-scrollbar-thumb:hover {
     transform: translateY(0);
   }
 }
-.form-vertical {
+/**
+ * @fileoverview Fichero componente de formularios, campos de texto y elementos de control.
+ * Asegura la consistencia cromática, la pasarela de acceso y el blindaje del Design System.
+ * @version 3.2.3
+ * @package MartinezRouting.Styles.Components
+ */
+.login-view-wrapper {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.form-vertical .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.form-vertical .form-group label {
-  color: #94a3b8;
-  font-size: 0.8125rem;
-  font-weight: 500;
-}
-.form-vertical input[type=text],
-.form-vertical input[type=search],
-.form-vertical input[type=number],
-.form-vertical select {
-  width: 100%;
-  background-color: #090d16;
-  color: #f8fafc;
-  border: 1px solid #22314d;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  font-size: 0.84375rem;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.form-vertical input[type=text]:focus,
-.form-vertical input[type=search]:focus,
-.form-vertical input[type=number]:focus,
-.form-vertical select:focus {
-  border-color: #06b6d4;
-  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.15);
-}
-.form-vertical .grid-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-.form-vertical .checkbox-row {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-}
-.form-vertical .checkbox-row input[type=checkbox] {
-  width: 1rem;
-  height: 1rem;
-  accent-color: #3b82f6;
+  justify-content: center;
+  background-color: #090d16;
+  background-image: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.02) 0%, transparent 40%);
+  padding: 1.25rem;
 }
 
-.search-express-bar {
-  margin-bottom: 1.25rem;
-  padding: 1rem;
+.login-card-container {
   background-color: #131c2e;
-  border-left: 4px solid #06b6d4;
-  border-radius: 0 8px 8px 0;
-  border-top: 1px solid rgba(34, 49, 77, 0.4);
-  border-right: 1px solid rgba(34, 49, 77, 0.4);
-  border-bottom: 1px solid rgba(34, 49, 77, 0.4);
-}
-.search-express-bar .express-inputs-group {
+  border: 1px solid rgba(34, 49, 77, 0.8);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 27.5rem;
+  box-shadow: 0 1.25rem 3.125rem -0.75rem rgba(0, 0, 0, 0.5);
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: border-color all 0.25s cubic-bezier(0.4, 0, 0.2, 1) ease;
+}
+.login-card-container:focus-within {
+  border-color: rgba(6, 182, 212, 0.3);
+}
+.login-card-container__header {
+  text-align: center;
+}
+.login-card-container__header .brand-title {
+  font-family: "Manrope", system-ui, -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  letter-spacing: -0.03125rem;
+  margin: 0;
+}
+.login-card-container__header .brand-title span {
+  color: #06b6d4;
+}
+.login-card-container__header .brand-subtitle {
+  font-size: 0.84375rem;
+  color: #94a3b8;
+  margin: 0.25rem 0 0 0;
+}
+
+.form-group-panel, .form-group-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.25rem;
+  position: relative;
   width: 100%;
 }
-.search-express-bar .express-inputs-group input[type=text] {
-  flex: 1;
-  text-transform: uppercase;
+.form-group-panel__label, .form-group-login__label {
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.03125rem;
-  font-size: 0.8125rem;
-  padding: 0.5rem 1rem;
-  background-color: #090d16;
-  border: 1px solid #22314d;
-  border-radius: 6px;
-}
-.search-express-bar .express-inputs-group input[type=text]:focus {
-  border-color: #06b6d4;
-  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.15);
-}
-.search-express-bar .express-inputs-group select {
-  width: 11.875rem;
-  font-size: 0.8125rem;
-  background-color: #090d16;
-  border: 1px solid #22314d;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.upload-box {
-  border: 2px dashed #22314d;
-  border-radius: 8px;
-  padding: 2rem 1.25rem;
-  text-align: center;
-  background-color: rgba(9, 13, 22, 0.4);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.upload-box:hover {
-  border-color: #3b82f6;
-  background-color: rgba(19, 28, 46, 0.3);
-}
-.upload-box input[type=file] {
-  display: none;
-}
-.upload-box .custom-file-upload {
   color: #f8fafc;
-  cursor: pointer;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
+  letter-spacing: 0.0125rem;
 }
-.upload-box .file-name-display {
-  color: #94a3b8;
-  font-size: 0.75rem;
+.form-group-panel__input, .form-group-login__input {
+  background-color: #1e293b;
+  border: 1px solid #22314d;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  color: #f1f5f9;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+  transition: all all 0.15s cubic-bezier(0.4, 0, 0.2, 1) ease;
+  width: 100%;
+}
+.form-group-panel__input::-moz-placeholder, .form-group-login__input::-moz-placeholder {
+  color: #475569;
+}
+.form-group-panel__input::placeholder, .form-group-login__input::placeholder {
+  color: #475569;
+}
+.form-group-panel__input:focus, .form-group-login__input:focus {
+  outline: none;
+  background-color: rgb(33.4382022472, 45.6988764045, 65.7617977528);
+  border-color: #06b6d4;
+  box-shadow: 0 0 0 0.125rem rgba(6, 182, 212, 0.15);
 }
 
-.btn-primary-lg {
+.btn-login-submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -514,32 +523,42 @@ body::-webkit-scrollbar-thumb:hover {
      -moz-user-select: none;
           user-select: none;
   line-height: 1;
-  width: 100%;
-  padding: 1rem;
-  background-color: #06b6d4;
-  color: #090d16;
-  font-weight: 700;
+  background-color: #3b82f6;
+  color: #f1f5f9;
+  padding: 0.75rem;
   font-size: 0.875rem;
-  letter-spacing: 0.01875rem;
-  box-shadow: 0 0.25rem 0.75rem rgba(6, 182, 212, 0.25);
+  font-weight: 700;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 0.75rem rgba(59, 130, 246, 0.3);
 }
-.btn-primary-lg:hover {
-  background-color: rgb(10.7137614679, 213.5174311927, 248.0862385321);
-  transform: translateY(-1px);
+.btn-login-submit:hover:not(:disabled) {
+  background-color: rgb(83.3804878049, 145.5487804878, 247.1195121951);
+  box-shadow: 0 0.375rem 1rem rgba(59, 130, 246, 0.4);
+  transform: translateY(-0.0625rem);
 }
-.btn-primary-lg:active {
+.btn-login-submit:active:not(:disabled) {
   transform: translateY(0);
+}
+.btn-login-submit:disabled {
+  background-color: #1e293b;
+  color: #475569;
+  border-color: #22314d;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 #login-error-msg {
-  background-color: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgb(241.0098522167, 91.4901477833, 91.4901477833);
   padding: 0.75rem 1rem;
   border-radius: 6px;
   font-size: 0.8125rem;
   font-weight: 500;
-  transition: opacity all 0.15s cubic-bezier(0.4, 0, 0.2, 1) ease;
+  line-height: 1.4;
 }
 #login-error-msg.error-message-panel--hidden {
   display: none;
@@ -548,18 +567,21 @@ body::-webkit-scrollbar-thumb:hover {
 #login-error-msg.error-message-panel--visible {
   display: block;
   opacity: 1;
-  animation: shake-error 0.4s ease-in-out;
+  animation: error-shake-trigger 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-@keyframes shake-error {
-  0%, 100% {
-    transform: translateX(0);
+@keyframes error-shake-trigger {
+  10%, 90% {
+    transform: translate3d(-0.0625rem, 0, 0);
   }
-  20%, 60% {
-    transform: translateX(-0.25rem);
+  20%, 80% {
+    transform: translate3d(0.125rem, 0, 0);
   }
-  40%, 80% {
-    transform: translateX(0.25rem);
+  30%, 50%, 70% {
+    transform: translate3d(-0.25rem, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(0.25rem, 0, 0);
   }
 }
 .modal-overlay {
@@ -699,7 +721,7 @@ body::-webkit-scrollbar-thumb:hover {
 /**
  * @fileoverview Fichero componente de tarjetas, contenedores de alta densidad de datos y paneles tácticos.
  * Implementa la consistencia cromática del Design System corporativo Martinez Routing.
- * @version 3.1.0
+ * @version 3.2.1
  * @package MartinezRouting.Styles.Components
  */
 .card-panel {
@@ -774,19 +796,19 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: rgba(19, 28, 46, 0.9);
   border-color: rgba(34, 49, 77, 0.9);
 }
-.transporte-master-row .info-block {
+.transporte-master-row__info {
   display: flex;
   flex-direction: column;
   gap: 0.1875rem;
   line-height: 1.3;
 }
-.transporte-master-row .actions-block {
+.transporte-master-row__actions {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   min-width: 6.875rem;
 }
-.transporte-master-row .actions-block button {
+.transporte-master-row__actions button, .transporte-master-row__actions .btn-danger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -803,6 +825,8 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 0.5rem;
   font-size: 0.75rem;
   font-weight: 700;
+  width: 100%;
+  text-align: center;
 }
 
 .card-unidad-tactica {
@@ -1076,127 +1100,6 @@ body::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
   }
 }
-.transporte-master-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.25rem;
-  border-left: 4px solid #06b6d4;
-  background-color: rgba(19, 28, 46, 0.4);
-  border-radius: 8px;
-  border-top: 1px solid rgba(34, 49, 77, 0.5);
-  border-right: 1px solid rgba(34, 49, 77, 0.5);
-  border-bottom: 1px solid rgba(34, 49, 77, 0.5);
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 0.75rem;
-}
-.transporte-master-row__info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  line-height: 1.35;
-}
-.transporte-master-row__title {
-  font-size: 1.09375rem;
-  color: #f1f5f9;
-  font-weight: 800;
-  letter-spacing: -0.01875rem;
-}
-.transporte-master-row__badge-pill {
-  width: -moz-max-content;
-  width: max-content;
-  font-size: 0.71875rem;
-  padding: 0.15625rem 0.5rem;
-  font-weight: 700;
-  border-radius: 4px;
-  margin-bottom: 0.125rem;
-}
-.transporte-master-row__meta {
-  font-size: 0.875rem;
-  color: #94a3b8;
-}
-.transporte-master-row__meta strong {
-  color: #f8fafc;
-}
-.transporte-master-row__meta-sub {
-  font-size: 0.8125rem;
-  color: #475569;
-}
-.transporte-master-row__meta-sub strong {
-  color: #94a3b8;
-}
-.transporte-master-row__notes {
-  font-size: 0.8125rem;
-  color: #f97316;
-  margin-top: 0.125rem;
-  display: block;
-}
-.transporte-master-row__actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 7.8125rem;
-}
-.transporte-master-row__actions button, .transporte-master-row__actions .btn-danger {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  font-weight: 600;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  line-height: 1;
-  padding: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-align: center;
-  width: 100%;
-}
-.transporte-master-row__actions .btn-edit-maestro {
-  background-color: #1e293b;
-  color: #06b6d4;
-}
-.transporte-master-row__actions .btn-edit-maestro:hover {
-  background-color: rgb(38.595505618, 52.7471910112, 75.904494382);
-}
-.transporte-master-row__actions .btn-ver-reclamos {
-  background-color: rgba(249, 115, 22, 0.15);
-  color: #f97316;
-  border: 1px solid rgba(249, 115, 22, 0.3);
-}
-.transporte-master-row__actions .btn-ver-reclamos:hover {
-  background-color: rgba(249, 115, 22, 0.25);
-}
-.transporte-master-row__modal-loading {
-  color: #94a3b8;
-  text-align: center;
-  padding: 1.25rem;
-  font-size: 0.875rem;
-}
-.transporte-master-row__modal-empty {
-  color: #10b981;
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-.transporte-master-row__incident-item {
-  background-color: rgba(239, 68, 68, 0.06);
-  border-left: 3px solid #ef4444;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
-  font-size: 0.84375rem;
-  color: #f1f5f9;
-  line-height: 1.45;
-}
-
 .panel-actions-header {
   display: flex;
   justify-content: space-between;
@@ -1375,6 +1278,183 @@ body::-webkit-scrollbar-thumb:hover {
   margin-bottom: 0.25rem;
 }
 
+/**
+ * @fileoverview Rediseño premium inmersivo para la Terminal de Acceso.
+ * Implementa interfaces oscuras corporativas avanzadas de alta densidad.
+ * @version 3.3.0
+ * @package MartinezRouting.Styles.Pages
+ */
+.login-view-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0b0f19;
+  background-image: radial-gradient(circle at 10% 15%, rgba(30, 64, 175, 0.07) 0%, transparent 50%), radial-gradient(circle at 90% 85%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+  padding: 1.25rem;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.login-card-container {
+  background-color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 2.5rem 2.75rem;
+  width: 100%;
+  max-width: 26.25rem;
+  box-shadow: 0 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1), 0 1.25rem 2.5rem -0.25rem rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  transition: border-color all 0.25s cubic-bezier(0.4, 0, 0.2, 1) cubic-bezier(0.4, 0, 0.2, 1);
+}
+.login-card-container:focus-within {
+  border-color: rgba(6, 182, 212, 0.3);
+}
+.login-card-container__header {
+  text-align: center;
+}
+.login-card-container__header .brand-title {
+  font-family: "Manrope", system-ui, -apple-system, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f3f4f6;
+  letter-spacing: -0.03125rem;
+  margin: 0;
+}
+.login-card-container__header .brand-title span {
+  color: #22d3ee;
+  font-weight: 900;
+  margin-left: 0.0625rem;
+}
+.login-card-container__header .brand-subtitle {
+  font-size: 0.8125rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  letter-spacing: 0.0125rem;
+}
+.login-card-container__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.form-group-login__label {
+  font-size: 0.71875rem;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 0.03125rem;
+  text-transform: uppercase;
+}
+.form-group-login__input {
+  background-color: #1f2937;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.6875rem 0.875rem;
+  color: #f9fafb;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+  transition: all all 0.15s cubic-bezier(0.4, 0, 0.2, 1) ease;
+  width: 100%;
+}
+.form-group-login__input::-moz-placeholder {
+  color: #4b5563;
+}
+.form-group-login__input::placeholder {
+  color: #4b5563;
+}
+.form-group-login__input:focus {
+  outline: none;
+  border-color: #06b6d4;
+  background-color: #1f2937;
+  box-shadow: 0 0 0 0.1875rem rgba(6, 182, 212, 0.12);
+}
+
+.btn-login-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  line-height: 1;
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all all 0.15s cubic-bezier(0.4, 0, 0.2, 1) ease;
+  cursor: pointer;
+}
+.btn-login-submit:hover:not(:disabled) {
+  background-color: #3b82f6;
+  box-shadow: 0 0.375rem 1.25rem rgba(37, 99, 235, 0.35);
+  transform: translateY(-0.0625rem);
+}
+.btn-login-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+.btn-login-submit:disabled {
+  background-color: #1f2937;
+  color: #4b5563;
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#login-error-msg {
+  background-color: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #f87171;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+#login-error-msg.error-message-panel--hidden {
+  display: none;
+  opacity: 0;
+}
+#login-error-msg.error-message-panel--visible {
+  display: block;
+  opacity: 1;
+  animation: login-shake-error 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes login-shake-error {
+  10%, 90% {
+    transform: translate3d(-0.0625rem, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(0.125rem, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-0.25rem, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(0.25rem, 0, 0);
+  }
+}
 .admin-view-wrapper {
   display: flex;
   flex-direction: column;

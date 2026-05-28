@@ -95,15 +95,33 @@ class ApplicationBootstrapper {
     /**
      * Inyecta de forma segura los nombres y roles sanitizados del despachador sobre la barra superior de UI.
      */
+/**
+     * Inyecta de forma segura los nombres y roles sanitizados del despachador sobre la barra superior de UI.
+     */
+/**
+     * Inyecta de forma segura los nombres y roles sanitizados del despachador sobre la barra superior de UI.
+     */
     inyectarMetadatosUsuarioNavegacion() {
         const displayNombreNodo = document.getElementById('nav-user-name');
         const displayRolNodo = document.getElementById('nav-user-role');
 
-        if (displayNombreNodo && this.currentUser) {
-            displayNombreNodo.textContent = Sanitizers.escapeHtml(this.currentUser.nombre);
+        // CLÁUSULA DE SALVAGUARDA: Si no estamos en una página interna que posea barra de navegación, salimos pacíficamente.
+        if (!displayNombreNodo && !displayRolNodo) {
+            console.log("[Core Layout] Omitiendo inyección tipográfica superior: Barra de navegación no presente en esta vista.");
+            return;
         }
-        if (displayRolNodo && this.currentUser) {
-            displayRolNodo.textContent = `[${Sanitizers.escapeHtml(this.currentUser.rol.toUpperCase())}]`;
+
+        // Doble verificación del helper para blindar contra retrasos de importación de módulos
+        const escapeHelper = (Sanitizers && Sanitizers.escapeHtml) 
+            ? Sanitizers.escapeHtml 
+            : (txt) => String(txt);
+
+        if (displayNombreNodo && this.currentUser && this.currentUser.nombre) {
+            displayNombreNodo.textContent = escapeHelper(this.currentUser.nombre);
+        }
+        
+        if (displayRolNodo && this.currentUser && this.currentUser.rol) {
+            displayRolNodo.textContent = `[${escapeHelper(this.currentUser.rol.toUpperCase())}]`;
         }
     }
 
