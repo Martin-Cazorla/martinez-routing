@@ -1,7 +1,7 @@
 /**
  * @fileoverview Fichero componente de tarjetas, contenedores de alta densidad de datos y paneles tácticos.
  * Implementa la consistencia cromática del Design System corporativo Martinez Routing.
- * @version 3.2.0
+ * @version 3.2.1
  * @package MartinezRouting.Styles.Components
  */
 
@@ -91,7 +91,6 @@
     border-color: alpha-surface($border-color, 0.9);
   }
 
-  // Corrección arquitectónica BEM sobre sub-elementos internos
   &__info {
     display: flex;
     flex-direction: column;
@@ -105,11 +104,13 @@
     gap: $space-sm;
     min-width: rem(110);
 
-    button {
+    button, .btn-danger {
       @include btn-base;
       padding: $space-sm;
       font-size: rem(12);
       font-weight: 700;
+      width: 100%;
+      text-align: center;
     }
   }
 }
@@ -128,7 +129,6 @@
   overflow: hidden;
   transition: $motion-normal;
 
-  // Modificadores reactivos operativos basados en negocio real
   &--en-campo {
     background-color: alpha-surface($time-red, 0.04);
     border-color: alpha-surface($time-red, 0.35);
@@ -156,7 +156,6 @@
     box-shadow: 0 0 rem(12) alpha-surface($time-red, 0.15);
   }
 
-  // Sello flotante de jornada cumplida (Estilo industrial)
   .sello-jornada-cumplida {
     position: absolute;
     top: 50%; left: 50%;
@@ -354,14 +353,14 @@
   }
 }
 
-// Separadores analíticos de UI limpia
+// Separadores analíticos
 .separator {
   border: 0;
   border-top: 1px solid $border-color;
   margin: $space-lg 0;
 }
 
-// Adornos de pulso semánticos para KPIs del Index Controller
+// Adornos de pulso semánticos
 .badge--pulse {
   animation: pulso-kpi-badge 2s infinite ease-in-out;
 }

@@ -1,7 +1,7 @@
 /**
  * @fileoverview Hoja de estilos específica para la pasarela de acceso y Login Terminal.
  * Diseña la interfaz inmersiva oscura alineada con las directivas de Martinez Routing.
- * @version 3.2.0
+ * @version 3.2.1
  * @package MartinezRouting.Styles.Pages
  */
 
@@ -15,7 +15,6 @@
   align-items: center;
   justify-content: center;
   background-color: $bg-dark;
-  // Gradiente radial perimetral para generar profundidad táctica de software industrial
   background-image: 
     radial-gradient(circle at 15% 20%, alpha-surface($time-blue, 0.04) 0%, transparent 45%),
     radial-gradient(circle at 85% 80%, alpha-surface($time-cyan, 0.03) 0%, transparent 45%);
@@ -76,7 +75,7 @@
   }
 }
 
-// Bloques de campos de entrada tácticos
+// Bloques de campos de entrada tácticos (Alineados con login.html)
 .form-group-login {
   display: flex;
   flex-direction: column;
@@ -88,6 +87,7 @@
     color: $text-main;
     letter-spacing: rem(0.75);
     text-transform: uppercase;
+    margin-bottom: rem(2);
   }
 
   &__input {
@@ -99,6 +99,7 @@
     font-family: $font-text;
     font-size: rem(14.5);
     transition: all $motion-fast ease;
+    width: 100%;
 
     &::placeholder {
       color: $text-disabled;
@@ -147,7 +148,7 @@
   }
 }
 
-// Panel interactivo de control de errores (Clases inyectadas por LoginController)
+// Panel interactivo de control de errores
 #login-error-msg {
   background-color: alpha-surface($time-red, 0.08);
   border: 1px solid alpha-surface($time-red, 0.35);
@@ -170,7 +171,6 @@
   }
 }
 
-// Animación táctica estructural para alertar errores de firmas de credenciales
 @keyframes login-shake-error {
   10%, 90% { transform: translate3d(rem(-1), 0, 0); }
   20%, 80% { transform: translate3d(rem(2), 0, 0); }
