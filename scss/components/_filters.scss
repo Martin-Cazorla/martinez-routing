@@ -1,0 +1,119 @@
+@use '../abstracts' as *;
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: $space-lg;
+
+  @include respond-to('sm') {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.dashboard-counters {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+// Etiquetas de Estado de Alta Visibilidad Profesional
+.badge {
+  padding: $space-sm $space-xl;
+  border-radius: rem(20);
+  font-size: rem(13);
+  font-weight: 500;
+  color: $white-smoke;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  line-height: 1;
+
+  &--info {
+    background-color: alpha-surface($time-blue, 0.12);
+    border: 1px solid alpha-surface($time-blue, 0.25);
+    color: lighten($time-blue, 10%);
+  }
+
+  &--success {
+    background-color: alpha-surface($time-green, 0.12);
+    border: 1px solid alpha-surface($time-green, 0.25);
+    color: lighten($time-green, 10%);
+  }
+
+  &--danger {
+    background-color: alpha-surface($time-red, 0.12);
+    border: 1px solid alpha-surface($time-red, 0.25);
+    color: lighten($time-red, 10%);
+  }
+
+  &--premium {
+    background-color: alpha-surface($premium-purple, 0.12);
+    border: 1px solid alpha-surface($premium-purple, 0.25);
+    color: lighten($premium-purple, 10%);
+  }
+
+  &--critico {
+    background-color: alpha-surface($alert-fire, 0.12);
+    border: 1px solid alpha-surface($alert-fire, 0.25);
+    color: lighten($alert-fire, 10%);
+  }
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+// Barra de filtrado táctico
+.filter-bar {
+  background-color: $bg-surface;
+  border-bottom: 1px solid $border-color;
+  padding: $space-lg $space-2xl;
+  display: flex;
+  align-items: center;
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: $space-lg;
+
+    label {
+      color: $text-main;
+      font-size: rem(14);
+      font-weight: 500;
+    }
+  }
+}
+
+// Selector de Almanaque Nativo Estilizado (Formato AWS/Linear)
+.date-picker-custom {
+  position: relative;
+  background-color: $bg-dark;
+  color: $text-main;
+  border: 1px solid $border-color;
+  padding: $space-sm $space-lg;
+  border-radius: $radius-md;
+  font-size: rem(13.5);
+  cursor: pointer;
+  transition: $motion-fast;
+
+  &:focus {
+    border-color: $border-focus;
+    box-shadow: 0 0 0 2px alpha-surface($border-focus, 0.15);
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2306b6d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='18' x='3' y='4' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' x2='16' y1='2' y2='6'%3E%3C/line%3E%3Cline x1='8' x2='8' y1='2' y2='6'%3E%3C/line%3E%3Cline x1='3' x2='21' y1='10' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

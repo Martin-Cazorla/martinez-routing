@@ -1,0 +1,76 @@
+@use '../abstracts' as *;
+
+// Arquitectura de Carriles Horarios de Alta Densidad Logística
+.panel-actions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $space-xl;
+
+  .panel-title {
+    color: $white-smoke;
+    margin: 0;
+    font-size: rem(20);
+    font-weight: 700;
+  }
+}
+
+.form-vertical-stack {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+}
+
+// Carril Horario Mapeado Expresamente
+.bloque-horario-jornada {
+  border-bottom: 1px solid alpha-surface($border-color, 0.5);
+  padding-bottom: $space-xl;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .horario-header-title {
+    background-color: alpha-surface($bg-surface-soft, 0.6);
+    padding: $space-sm $space-lg;
+    border-radius: $radius-sm;
+    color: $time-cyan;
+    font-size: rem(13);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: $space-lg;
+    letter-spacing: rem(0.75);
+    border-left: 3px solid $time-cyan;
+    display: inline-block;
+  }
+}
+
+// Reducción estricta de brecha horizontal para comprimir tarjetas lógicas
+.horario-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(rem(220), 1fr));
+  gap: $space-md;
+}
+
+// Elementos complementarios del flujo de carga de la SPA
+.placeholder-vacio-jornada {
+  color: $text-disabled;
+  padding: $space-3xl;
+  text-align: center;
+  font-size: rem(13.5);
+  border: 1px dashed $border-color;
+  border-radius: $radius-lg;
+}
+
+.card-panel--danger-alert {
+  border-left: 3px solid $time-red;
+  background-color: alpha-surface($time-red, 0.02);
+  padding: $space-lg;
+  border-radius: 0 $radius-md $radius-md 0;
+
+  .alert-reason-text {
+    font-size: rem(13);
+    color: lighten($time-red, 10%);
+    font-weight: 500;
+  }
+}

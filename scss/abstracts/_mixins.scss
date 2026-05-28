@@ -1,0 +1,54 @@
+@use "sass:map";
+@use "sass:color";
+@use 'tokens' as *;
+
+// Mixin de Media Queries automatizadas por Token
+@mixin respond-to($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @error "El breakpoint '#{$breakpoint}' no existe en el sistema de diseño.";
+  }
+}
+
+// Scrollbars corporativos de alta densidad de datos
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $bg-dark;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: $radius-sm;
+    &:hover {
+      background: color.adjust($border-color, $lightness: 10%);
+    }
+  }
+}
+
+// Estructuración de textos elípticos truncados en grillas compactas
+@mixin text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Botones base enterprise listos para interactividad operativa
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: $motion-fast;
+  user-select: none;
+  line-height: 1;
+}

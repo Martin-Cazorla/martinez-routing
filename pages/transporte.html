@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinez Routing - Gestión de Flota Central</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="layout-app">
+
+    <header class="app-header">
+        <nav class="app-navbar" aria-label="Navegación del centro de control de vehículos estables">
+            <div class="brand-title">Martinez Routing Flota</div>
+            <div class="dashboard-counters" role="menubar">
+                <a href="../index.html" class="nav-link" role="menuitem">Inicio</a>
+                <a href="dashboard.html" class="nav-link" role="menuitem">Panel de Carga</a>
+                <a href="shipping.html" class="nav-link" role="menuitem">Consola Mapa</a>
+                <a href="transporte.html" class="nav-link nav-link--active" role="menuitem" aria-current="page">Flota</a>
+                <a href="clientes.html" class="nav-link" role="menuitem">Clientes</a>
+                <a href="administracion.html" class="nav-link" role="menuitem">Seguridad</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="layout-main">
+        <div class="grid-two-columns">
+            
+            <section class="card-panel" aria-labelledby="form-flota-title">
+                <h2 id="form-flota-title" class="section-title">Alta de Unidad Nueva (Fichero Maestro)</h2>
+                <p class="instruction-text">Registre las camionetas estables que integran la flota de distribución de Jumbo Martinez.</p>
+                
+                <form id="form-alta-transporte" class="form-enterprise">
+                    <input type="hidden" id="t-id-edicion">
+
+                    <div class="form-enterprise__group">
+                        <label for="t-numero-unidad" class="form-enterprise__label">Número de Unidad (Interno Fijo):</label>
+                        <input type="text" id="t-numero-unidad" class="form-enterprise__input" placeholder="Ej: 99" required autocomplete="off">
+                    </div>
+                    <div class="form-enterprise__group">
+                        <label for="t-modelo-unidad" class="form-enterprise__label">Modelo del Vehículo:</label>
+                        <input type="text" id="t-modelo-unidad" class="form-enterprise__input" placeholder="Ej: Renault Master 2.5 DCI" required autocomplete="off">
+                    </div>
+                    <div class="form-enterprise__group">
+                        <label for="t-nombre-chofer" class="form-enterprise__label">Nombre y Apellido del Chofer:</label>
+                        <input type="text" id="t-nombre-chofer" class="form-enterprise__input" placeholder="Ej: Carlos Vitale" required autocomplete="off">
+                    </div>
+                    <div class="form-enterprise__group">
+                        <label for="t-tamanio-unidad" class="form-enterprise__label">Capacidad / Tamaño de Carga:</label>
+                        <select id="t-tamanio-unidad" class="form-enterprise__input" required>
+                            <option value="Chico">Chico (Furgón)</option>
+                            <option value="Mediano">Mediano (Chasis)</option>
+                            <option value="Grande">Grande (Balancín / Master)</option>
+                        </select>
+                    </div>
+                    <div class="form-enterprise__group">
+                        <label for="t-comentarios-unidad" class="form-enterprise__label">Historial de Observaciones / Reclamos de la Unidad:</label>
+                        <textarea id="t-comentarios-unidad" class="form-enterprise__input" rows="4" placeholder="Detalles de mantenimiento, estado mecánico o reclamos permanentes de la unidad..."></textarea>
+                    </div>
+                    
+                    <div class="form-enterprise__actions-split">
+                        <button type="submit" id="btn-submit-transporte" class="btn-primary-lg">Guardar en Fichero Global</button>
+                        <button type="button" id="btn-cancelar-edicion" class="btn-secondary-action">Cancelar Edición</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card-panel" aria-labelledby="list-flota-title">
+                <h2 id="list-flota-title" class="section-title">Fichero General de Flota Activa</h2>
+                <div class="search-box">
+                    <label for="search-flota" class="screen-reader-only">Buscar en fichero general de flotas:</label>
+                    <input type="search" id="search-flota" class="form-enterprise__input" placeholder="Buscar por número de interno, modelo o chofer...">
+                </div>
+                
+                <div id="listado-flota-maestra" class="list-scroll-box" role="region" aria-live="polite" aria-busy="false"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="modal-historial-reclamos" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-history-title">
+        <div class="modal-base-refinado">
+            <div class="modal-content-wrapper">
+                <header class="modal-header">
+                    <h3 id="modal-history-title">Historial de Novedades - Interno #<span id="modal-interno-titulo">00</span></h3>
+                    <button class="btn-close-modal btn-close-x" id="btn-cerrar-modal-reclamos" aria-label="Cerrar panel de novedades">&times;</button>
+                </header>
+                <div class="card-panel card-panel--nested">
+                    <p class="instruction-text">Registro acumulado de alertas mecánicas y reclamos reportados</p>
+                    <div id="modal-listado-novedades" class="list-scroll-box list-scroll-box--nested-modal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/controllers/transporteController.js"></script>
+</body>
+</html>

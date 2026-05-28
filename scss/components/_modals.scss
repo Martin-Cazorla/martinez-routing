@@ -1,0 +1,118 @@
+@use '../abstracts' as *;
+
+// Refactorización limpia usando envolturas modulares unificadas
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: alpha-surface(#000, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s linear;
+
+  &.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// Base refinada aplicable tanto a div overlays como a dialog nativo
+.modal-base-refinado {
+  background: $bg-surface;
+  border: 1px solid $border-color;
+  border-radius: $radius-xl;
+  padding: $space-2xl;
+  max-width: rem(460);
+  width: 90%;
+  color: $text-main;
+  box-shadow: 0 rem(20) rem(40) alpha-surface(#000, 0.6);
+  outline: none;
+
+  &::backdrop {
+    background-color: alpha-surface(#000, 0.8);
+  }
+
+  .modal-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+  }
+
+  .modal-header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: $space-md;
+    
+    h3 { margin: 0; font-size: rem(16); color: $white-smoke; }
+    
+    .btn-close-x {
+      background: none; border: none; color: $text-muted;
+      font-size: rem(20); cursor: pointer;
+      line-height: 1;
+      transition: $motion-fast;
+      
+      &:hover { color: $time-red; }
+    }
+  }
+
+  .banner-extra-toggle-box {
+    background-color: alpha-surface($alert-fire, 0.05);
+    border: 1px solid alpha-surface($alert-fire, 0.25);
+    padding: $space-md;
+    border-radius: $radius-md;
+
+    .checkbox-interactive-label {
+      display: flex;
+      align-items: center;
+      gap: $space-sm;
+      font-weight: 700;
+      color: lighten($alert-fire, 10%);
+      font-size: rem(13);
+      cursor: pointer;
+      input { width: rem(15); height: rem(15); accent-color: $alert-fire; }
+    }
+
+    .sub-alert-text {
+      font-size: rem(11);
+      color: alpha-surface($text-muted, 0.8);
+      margin: $space-xs 0 0 0;
+    }
+  }
+
+  .modal-actions-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: $space-md;
+    margin-top: $space-sm;
+
+    button {
+      @include btn-base;
+      padding: $space-md $space-xl;
+      font-size: rem(13);
+    }
+
+    .btn-secondary-action {
+      background-color: $bg-surface-soft;
+      color: $text-main;
+      border: 1px solid $border-color;
+      &:hover { background-color: lighten($bg-surface-soft, 5%); }
+    }
+
+    .btn-danger-action {
+      background-color: $time-red;
+      color: $white-smoke;
+      &:hover { background-color: darken($time-red, 8%); }
+    }
+
+    .btn-save-action {
+      background-color: $time-green;
+      color: $white-smoke;
+      &:hover { background-color: darken($time-green, 8%); }
+    }
+  }
+}

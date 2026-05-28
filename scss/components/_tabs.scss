@@ -1,0 +1,55 @@
+@use '../abstracts' as *;
+
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+}
+
+// Lista de Solapas Estilo Linear sin Scroll Sanguinolento
+.tab-list {
+  display: flex;
+  border-bottom: 1px solid $border-color;
+  gap: $space-xs;
+  overflow-x: hidden; 
+  flex-wrap: nowrap; 
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: $text-muted;
+    padding: $space-md $space-2xl;
+    font-size: rem(14);
+    font-weight: 600;
+    cursor: pointer;
+    transition: $motion-fast;
+    border-radius: $radius-md $radius-md 0 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: rem(-1);
+
+    &:hover {
+      color: $text-main;
+      background-color: alpha-surface($border-color, 0.3);
+    }
+
+    &.active {
+      color: $time-blue; 
+      border-bottom-color: $time-blue;
+      background-color: alpha-surface($time-blue, 0.02);
+    }
+  }
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeIn 0.2s $transition-base;
+
+  &.active {
+    display: block;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(rem(4)); }
+  to { opacity: 1; transform: translateY(0); }
+}

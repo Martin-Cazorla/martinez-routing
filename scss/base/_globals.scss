@@ -1,0 +1,28 @@
+@use '../abstracts' as *;
+
+body {
+  @include custom-scrollbar;
+}
+
+// Parche global de accesibilidad y visualización interactiva para Leaflet.js
+.leaflet-container {
+  font-family: inherit !important;
+  background-color: $bg-dark !important;
+  
+  .leaflet-bar {
+    border: 1px solid $border-color !important;
+    box-shadow: none !important;
+    
+    a {
+      background-color: $bg-surface !important;
+      color: $text-main !important;
+      border-bottom: 1px solid $border-color !important;
+      transition: $motion-fast;
+      
+      &:hover {
+        background-color: $bg-surface-soft !important;
+        color: $white-smoke !important;
+      }
+    }
+  }
+}

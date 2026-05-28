@@ -1,0 +1,52 @@
+// ==========================================================================
+// DESIGN TOKENS - MARTINEZ ROUTING (ENTERPRISE DARK SYSTEM)
+// ==========================================================================
+
+// 1. Paleta de Colores (Inspiración: Uber Freight / Linear / Notion Dark)
+$bg-dark:         #090d16; // Slate 950 profundo (Fondo de UI)
+$bg-surface:      #131c2e; // Slate 900 refinado (Superficie de componentes / Cards)
+$bg-surface-soft: #1e293b; // Slate 800 (Foco, inputs y elementos interactivos)
+$border-color:    #22314d; // Slate 800 modificado (Contraste sutil en UI oscura)
+$border-focus:    #06b6d4; // Cyan operativo para focus y flotas tácticas
+
+// 2. Tipografía (Jerarquía de colores)
+$text-main:       #f8fafc; // Slate 50 (Alta legibilidad)
+$text-muted:      #94a3b8; // Slate 400 (Información secundaria)
+$text-disabled:   #475569; // Slate 600
+
+// 3. Colores Operativos de Control Real (Cero presencia de amarillo saturado)
+$time-red:        #ef4444; // Franja Horaria 10-14 / Urgencias Críticas
+$time-green:      #10b981; // Franja Horaria 13-16 / Entregas en curso / Éxito
+$time-blue:       #3b82f6; // Franja Horaria 16-19 / Flujo regular
+$time-cyan:       #06b6d4; // Distintivo de flota de ruteo / Transporte maestro
+$alert-fire:      #f97316; // Naranja fuego exclusivo para Clientes Críticos
+$premium-purple:  #a855f7; // Púrpura industrial para clientes Premium/Críticos combinados
+$white-smoke:     #f1f5f9; // Texto resaltado o tooltips
+
+// 4. Escala de Espaciados Sistémicos (Spacing Proporcional)
+$space-xs: 0.25rem;  // 4px
+$space-sm: 0.5rem;   // 8px
+$space-md: 0.75rem;  // 12px
+$space-lg: 1rem;     // 16px
+$space-xl: 1.25rem;  // 20px
+$space-2xl: 1.5rem;  // 24px
+$space-3xl: 2rem;    // 32px
+
+// 5. Bordes y Radios Enterprise
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-xl: 12px;
+
+// 6. Transiciones de Rendimiento Nativo
+$transition-base: cubic-bezier(0.4, 0, 0.2, 1);
+$motion-fast: all 0.15s $transition-base;
+$motion-normal: all 0.25s $transition-base;
+
+// 7. Breakpoints de Layout
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px
+);

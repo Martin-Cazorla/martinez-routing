@@ -1,0 +1,26 @@
+// ==========================================================================
+// CENTRALIZADOR COMPILADOR MAESTRO - MARTINEZ ROUTING
+// ==========================================================================
+
+// 1. Configuraciones de Base Estructurales
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/globals';
+
+// 2. Estructuras de Maquetación Distribuidas (Layout)
+@use 'layout/grid';
+@use 'layout/navbar';
+
+// 3. Componentes Atómicos Enterprise Centralizados
+@use 'components/filters';
+@use 'components/tabs';
+@use 'components/forms';
+@use 'components/modals';
+@use 'components/cards';
+
+// 4. Arquitectura de Páginas y Vistas Operativas de la SPA
+@use 'pages/dashboard';
+@use 'pages/shipping';
+@use 'pages/transporte';
+@use 'pages/login';
+@use 'pages/administracion';

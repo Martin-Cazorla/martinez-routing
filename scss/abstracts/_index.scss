@@ -1,0 +1,4 @@
+// Indexación unificada de la capa abstracts para fácil consumo por @use
+@forward 'tokens';
+@forward 'functions';
+@forward 'mixins';

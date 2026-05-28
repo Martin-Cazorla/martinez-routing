@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinez Routing - Control de Usuarios</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="layout-app">
+
+    <header class="app-header">
+        <nav class="app-navbar" aria-label="Navegación de cuentas corporativas y auditoría">
+            <div class="brand-title">Consola de Seguridad Operativa</div>
+            <div class="dashboard-counters" role="menubar">
+                <a href="../index.html" class="nav-link" role="menuitem">Inicio</a>
+                <a href="dashboard.html" class="nav-link" role="menuitem">Panel de Carga</a>
+                <a href="shipping.html" class="nav-link" role="menuitem">Consola Mapa</a>
+                <a href="transporte.html" class="nav-link" role="menuitem">Flota</a>
+                <a href="clientes.html" class="nav-link" role="menuitem">Clientes</a>
+                <a href="administracion.html" class="nav-link nav-link--active" role="menuitem" aria-current="page">Seguridad</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="layout-main">
+        <section class="card-panel" aria-labelledby="title-admin-usuarios" aria-describedby="desc-admin-usuarios">
+            <h2 id="title-admin-usuarios" class="panel-title">Permisos y Perfiles del Ecosistema</h2>
+            <p id="desc-admin-usuarios" class="instruction-text">Los perfiles listados a continuación reflejan los permisos vigentes validados por las reglas perimetrales de Firestore.</p>
+            
+            <div class="unidades-grid" id="usuarios-admin-append" role="region" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { db } from '../js/services/firebaseConfig.js';
+        import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        const container = document.getElementById('usuarios-admin-append');
+
+        onSnapshot(collection(db, "usuarios"), (snapshot) => {
+            if(!container) return;
+            let html = "";
+            snapshot.forEach(docSnap => {
+                const user = docSnap.data();
+                // Generación controlada con marcado semántico y clases BEM consistentes
+                html += `
+                    <article class="card-panel card-panel--user-tactical">
+                        <header class="card-panel__user-header">
+                            <h3 class="card-panel__user-name">${user.nombre}</h3>
+                            <span class="badge badge--info">${user.rol}</span>
+                        </header>
+                        <div class="card-panel__user-body">
+                            <p class="card-panel__user-data"><strong>Email:</strong> ${user.email}</p>
+                            <p class="card-panel__user-data"><strong>Estado:</strong> ${user.activo ? '<span class="status-indicator-inline status-indicator-inline--active">🟢 Autorizado</span>' : '<span class="status-indicator-inline status-indicator-inline--suspended">🔴 Suspendido</span>'}</p>
+                        </div>
+                    </article>
+                `;
+            });
+            container.innerHTML = html;
+        });
+    </script>
+</body>
+</html>

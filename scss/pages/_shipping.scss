@@ -1,0 +1,71 @@
+@use '../abstracts' as *;
+
+.shipping-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-xl;
+  height: calc(100vh - rem(70));
+  padding: $space-lg;
+  background-color: $bg-dark;
+
+  @include respond-to('lg') {
+    grid-template-columns: 1fr rem(440);
+  }
+
+  .map-wrapper {
+    position: relative; 
+    border-radius: $radius-xl;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    height: 100%;
+    min-height: rem(480);
+    
+    #map {
+      position: absolute; 
+      top: 0; bottom: 0; left: 0; right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: $bg-dark;
+    }
+  }
+
+  .control-sidebar {
+    background-color: $bg-surface;
+    border-radius: $radius-xl;
+    border: 1px solid $border-color;
+    padding: $space-xl;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: $space-xl;
+    @include custom-scrollbar;
+
+    h2, h3 {
+      color: $white-smoke;
+      margin: 0;
+    }
+
+    .list-scroll-box {
+      display: flex;
+      flex-direction: column;
+      gap: $space-sm;
+      overflow-y: auto;
+      flex: 1;
+      @include custom-scrollbar;
+    }
+  }
+}
+
+// Marcador reactivo geoespacial de alta criticidad (Fuego Activo)
+.marker-critical-fire {
+  animation: pulse-fire 1.2s infinite alternate $transition-base;
+  border-radius: 50%;
+  border: 3px solid $alert-fire;
+  box-shadow: 0 0 rem(15) $alert-fire;
+}
+
+@keyframes pulse-fire {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.18); filter: brightness(1.25); }
+}

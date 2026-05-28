@@ -1,0 +1,13 @@
+@use '../abstracts' as *;
+
+// Espacio de nombres dedicado para auditorías de clientes y cargas masivas
+.admin-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  
+  .panel-info-header {
+    padding-bottom: $space-md;
+    border-bottom: 1px solid $border-color;
+  }
+}

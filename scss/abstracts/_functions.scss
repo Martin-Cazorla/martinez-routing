@@ -1,0 +1,14 @@
+@use "sass:math";
+
+// Convertidor de pixeles estáticos a unidades dinámicas REM
+@function rem($pixels) {
+  @if math.is-unitless($pixels) {
+    @return (math.div($pixels, 16)) * 1rem;
+  }
+  @return $pixels;
+}
+
+// Generador de opacidad controlada para backgrounds oscuros enterprise
+@function alpha-surface($color, $opacity) {
+  @return rgba($color, $opacity);
+}

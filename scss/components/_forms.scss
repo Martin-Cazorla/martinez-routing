@@ -1,0 +1,167 @@
+/**
+ * @fileoverview Componente de formularios y pasarela de acceso (Login UI Grid).
+ * Implementa las directivas oscuras semánticas del Design System corporativo.
+ * @version 3.1.0
+ * @package MartinezRouting.Styles.Components
+ */
+
+@use "sass:color";
+@use '../abstracts' as *;
+
+// Contenedor envolvente del Shell de Login (Centrado absoluto en pantalla)
+.login-view-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg-dark;
+  background-image: 
+    radial-gradient(circle at 10% 20%, alpha-surface($time-blue, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, alpha-surface($time-cyan, 0.02) 0%, transparent 40%);
+  padding: $space-xl;
+}
+
+// Tarjeta estructurada del Formulario de Acceso Terminal
+.login-card-container {
+  background-color: $bg-surface;
+  border: 1px solid alpha-surface($border-color, 0.8);
+  border-radius: $radius-xl;
+  padding: $space-3xl;
+  width: 100%;
+  max-width: rem(440);
+  box-shadow: 0 rem(20) rem(50) rem(-12) rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  transition: border-color $motion-normal ease;
+
+  &:focus-within {
+    border-color: alpha-surface($time-cyan, 0.3);
+  }
+
+  // Encabezado con identidad de la aplicación
+  &__header {
+    text-align: center;
+    
+    .brand-title {
+      font-family: $font-headings;
+      font-size: rem(24);
+      font-weight: 800;
+      color: $white-smoke;
+      letter-spacing: rem(-0.5);
+      margin: 0;
+      
+      span {
+        color: $time-cyan;
+      }
+    }
+
+    .brand-subtitle {
+      font-size: rem(13.5);
+      color: $text-muted;
+      margin: $space-xs 0 0 0;
+    }
+  }
+}
+
+// Bloques de control y labels flotantes de alta densidad
+.form-group-panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  position: relative;
+
+  &__label {
+    font-size: rem(12.5);
+    font-weight: 600;
+    color: $text-main;
+    letter-spacing: rem(0.3);
+    text-transform: uppercase;
+  }
+
+  // Input de datos técnicos con consistencia cromática slate
+  &__input {
+    background-color: $bg-surface-soft;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    padding: $space-md $space-lg;
+    color: $white-smoke;
+    font-family: $font-text;
+    font-size: rem(14.5);
+    transition: all $motion-fast ease;
+
+    &::placeholder {
+      color: $text-disabled;
+    }
+
+    &:focus {
+      outline: none;
+      background-color: color.adjust($bg-surface-soft, $lightness: 2%);
+      border-color: $time-cyan;
+      box-shadow: 0 0 0 rem(3) alpha-surface($time-cyan, 0.15);
+    }
+  }
+}
+
+// Botón de validación de firmas criptográficas de sesión
+.btn-login-submit {
+  @include btn-base;
+  background-color: $time-blue;
+  color: $white-smoke;
+  padding: $space-md;
+  font-size: rem(14);
+  font-weight: 700;
+  border-radius: $radius-md;
+  width: 100%;
+  margin-top: $space-md;
+  cursor: pointer;
+  box-shadow: 0 rem(4) rem(12) alpha-surface($time-blue, 0.3);
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($time-blue, $lightness: 5%);
+    box-shadow: 0 rem(6) rem(16) alpha-surface($time-blue, 0.4);
+    transform: translateY(rem(-1));
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background-color: $bg-surface-soft;
+    color: $text-disabled;
+    border-color: $border-color;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// Contenedor semántico de visualización de errores (Con animación Shake)
+#login-error-msg {
+  background-color: alpha-surface($time-red, 0.08);
+  border: 1px solid alpha-surface($time-red, 0.3);
+  color: color.adjust($time-red, $lightness: 5%);
+  padding: $space-md $space-lg;
+  border-radius: $radius-md;
+  font-size: rem(13);
+  font-weight: 500;
+  line-height: 1.4;
+  
+  &.error-message-panel--hidden {
+    display: none;
+    opacity: 0;
+  }
+  
+  &.error-message-panel--visible {
+    display: block;
+    opacity: 1;
+    animation: error-shake-trigger 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  }
+}
+
+@keyframes error-shake-trigger {
+  10%, 90% { transform: translate3d(rem(-1), 0, 0); }
+  20%, 80% { transform: translate3d(rem(2), 0, 0); }
+  30%, 50%, 70% { transform: translate3d(rem(-4), 0, 0); }
+  40%, 60% { transform: translate3d(rem(4), 0, 0); }
+}

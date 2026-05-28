@@ -1,0 +1,9 @@
+# .gitignore corporativo para Martinez Routing
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+node_modules/
+dist/
+css/main.css.map

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinez Routing - Control Central</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="layout-app">
+
+    <header class="app-header">
+        <nav class="app-navbar" aria-label="Menú global del ecosistema logístico">
+            <div class="brand-title">Martinez Routing Central</div>
+            <div class="dashboard-counters" role="menubar">
+                <a href="index.html" class="nav-link nav-link--active" role="menuitem" aria-current="page">Inicio</a>
+                <a href="pages/dashboard.html" class="nav-link" role="menuitem">Panel de Carga</a>
+                <a href="pages/shipping.html" class="nav-link" role="menuitem">Consola Mapa</a>
+                <a href="pages/transporte.html" class="nav-link" role="menuitem">Flota</a>
+                <a href="pages/clientes.html" class="nav-link" role="menuitem">Clientes</a>
+                <a href="pages/administracion.html" class="nav-link" role="menuitem">Seguridad</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="layout-main layout-main--fluid">
+        
+        <section aria-label="Métricas de rendimiento operativo de la jornada" class="layout-kpi-grid">
+            <div class="card-panel card-panel--kpi">
+                <span class="card-panel__kpi-label">Pedidos de la Jornada</span>
+                <output id="kpi-pedidos" class="card-panel__kpi-value">0</output>
+            </div>
+            <div class="card-panel card-panel--kpi">
+                <span class="card-panel__kpi-label">Unidades Desplegadas</span>
+                <output id="kpi-unidades" class="card-panel__kpi-value card-panel__kpi-value--info">0</output>
+            </div>
+            <div class="card-panel card-panel--kpi">
+                <span class="card-panel__kpi-label">Alertas por Horas Extras</span>
+                <output id="kpi-extras" class="card-panel__kpi-value card-panel__kpi-value--danger">0</output>
+            </div>
+        </section>
+
+        <section class="dashboard-grid dashboard-grid--single" aria-labelledby="title-alertas-criticas">
+            <div class="card-panel">
+                <div class="card-panel__header-inline">
+                    <span class="card-panel__icon-alert" aria-hidden="true">⚠️</span>
+                    <h2 id="title-alertas-criticas" class="panel-title">Top 10 Clientes Críticos con Reclamos Pendientes</h2>
+                </div>
+                <div class="list-scroll-box" id="append-kpi-criticos" role="region" aria-live="polite" aria-busy="false"></div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { checkAuthGuard } from './js/utils/authGuard.js';
+        // Validación perimetral de sesión activa en la raíz
+        checkAuthGuard('pages/login.html');
+    </script>
+    <script type="module" src="./js/controllers/indexController.js"></script>
+</body>
+</html>

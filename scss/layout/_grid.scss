@@ -1,0 +1,22 @@
+@use '../abstracts' as *;
+
+// Grillas maestras operativas reutilizables en todo el software corporativo
+.grid-two-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-2xl;
+  align-items: start;
+
+  @include respond-to('lg') {
+    grid-template-columns: rem(420) 1fr;
+  }
+}
+
+// Layout flexible utilitario para vistas fluidas
+.layout-dashboard-flow {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  padding: $space-2xl;
+  min-height: calc(100vh - rem(70));
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinez Routing - Módulo General de Asignación</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="layout-app">
+
+    <header class="app-header">
+        <nav class="app-navbar" aria-label="Navegación principal de control cartográfico">
+            <div class="brand-title">Martinez Routing v2.5</div>
+            <div class="dashboard-counters" role="menubar">
+                <a href="../index.html" class="nav-link" role="menuitem">Inicio</a>
+                <a href="dashboard.html" class="nav-link" role="menuitem">Panel de Carga</a>
+                <a href="shipping.html" class="nav-link nav-link--active" role="menuitem" aria-current="page">Consola Mapa</a>
+                <a href="transporte.html" class="nav-link" role="menuitem">Flota</a>
+                <a href="clientes.html" class="nav-link" role="menuitem">Clientes</a>
+                <a href="administracion.html" class="nav-link" role="menuitem">Seguridad</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="filter-bar" role="toolbar" aria-label="Filtro global de jornada cartográfica">
+        <div class="filter-group">
+            <label for="map-date-filter"><strong>Visualizar Mapa de la Jornada:</strong></label>
+            <input type="date" id="map-date-filter" class="date-picker-custom" aria-required="true" onclick="this.showPicker()">
+        </div>
+    </div>
+
+    <main class="shipping-container">
+        
+        <section class="map-wrapper" aria-label="Mapa interactivo de distribución geográfica de la flota">
+            <div id="map"></div>
+        </section>
+
+        <aside class="control-sidebar" aria-labelledby="sidebar-dispatch-title">
+            <h2 id="sidebar-dispatch-title" class="control-sidebar__title">Consola de Despacho</h2>
+            
+            <div class="form-enterprise__group">
+                <label for="filter-franja" class="form-enterprise__label">Filtrar Ventana de Distribución:</label>
+                <select id="filter-franja" class="form-enterprise__input">
+                    <option value="all">Todas las Ventanas Operativas</option>
+                    <option value="10:00-14:00">Mañana (10:00 - 14:00) [Rojo]</option>
+                    <option value="13:00-16:00">Mediodía (13:00 - 16:00) [Verde]</option>
+                    <option value="16:00-19:00">Tarde (16:00 - 19:00) [Azul]</option>
+                    <option value="19:00-21:30">Nocturno (19:00 - 21:30) [Negro]</option>
+                </select>
+            </div>
+            
+            <hr aria-hidden="true" class="separator">
+            
+            <h3 class="control-sidebar__subtitle">Pedidos Disponibles</h3>
+            <div id="pedidos-list-append" class="list-scroll-box list-scroll-box--sidebar" role="region" aria-live="polite"></div>
+        </aside>
+    </main>
+
+    <dialog id="modal-asignacion-flota" class="modal-base-refinado" aria-labelledby="modal-assign-title">
+        <div class="modal-content-wrapper">
+            <header class="modal-header-nav">
+                <h3 id="modal-assign-title">Asignar Lote (<span id="modal-lote-cantidad">0</span> pedidos seleccionados)</h3>
+                <button class="btn-close-x" id="btn-close-assignment-dialog" aria-label="Cerrar ventana de despacho masivo">&times;</button>
+            </header>
+            <div class="modal-body-form">
+                <p class="modal-body-form__description">Seleccione la unidad operativa de la flota central para adjudicar el recorrido seleccionado en el lazo del mapa:</p>
+                <div class="form-enterprise__group">
+                    <label for="select-transporte-lote" class="form-enterprise__label form-enterprise__label--accent">Unidad de Destino:</label>
+                    <select id="select-transporte-lote" class="form-enterprise__input"></select>
+                </div>
+                <div class="banner-extra-toggle-box">
+                    <div class="checkbox-interactive-label">
+                        <span>⚠️ Al confirmar se actualizarán las órdenes en Firebase en tiempo real.</span>
+                    </div>
+                </div>
+            </div>
+            <footer class="modal-actions-footer">
+                <button type="button" class="btn-secondary-action" id="btn-cancelar-lote">Cancelar</button>
+                <button type="button" class="btn-save-action" id="btn-confirmar-despacho-lote">Confirmar Despacho Lote</button>
+            </footer>
+        </div>
+    </dialog>
+
+    <script type="module">
+        import { checkAuthGuard } from '../js/utils/authGuard.js';
+        checkAuthGuard('login.html'); 
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script type="module" src="../js/controllers/shippingController.js"></script>
+</body>
+</html>

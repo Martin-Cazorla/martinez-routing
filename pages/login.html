@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinez Routing - Terminal de Acceso Perimetral</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="login-view-wrapper">
+
+    <main class="login-card-container">
+        <header class="login-card-container__header">
+            <h1 class="brand-title">MARTINEZ<span>ROUTING</span></h1>
+            <p class="brand-subtitle">Consola de Despacho y Monitoreo de Flota</p>
+        </header>
+
+        <div id="login-error-msg" class="error-message-panel--hidden" role="alert"></div>
+
+        <form id="form-login" class="login-card-container__form" novalidate>
+            <div class="form-group-panel">
+                <label for="login-email" class="form-group-panel__label">Usuario Técnico</label>
+                <input type="email" 
+                       id="login-email" 
+                       class="form-group-panel__input" 
+                       placeholder="operador@martinez.com" 
+                       required autocomplete="username">
+            </div>
+
+            <div class="form-group-panel" style="margin-top: 1.25rem;">
+                <label for="login-password" class="form-group-panel__label">Clave de Seguridad</label>
+                <input type="password" 
+                       id="login-password" 
+                       class="form-group-panel__input" 
+                       placeholder="••••••••••••" 
+                       required autocomplete="current-password">
+            </div>
+
+            <button type="submit" id="btn-login-submit" class="btn-login-submit">
+                Validar Credenciales
+            </button>
+        </form>
+    </main>
+
+    <script type="module" src="../js/app.js"></script>
+</body>
+</html>

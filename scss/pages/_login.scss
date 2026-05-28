@@ -1,0 +1,179 @@
+/**
+ * @fileoverview Hoja de estilos específica para la pasarela de acceso y Login Terminal.
+ * Diseña la interfaz inmersiva oscura alineada con las directivas de Martinez Routing.
+ * @version 3.2.0
+ * @package MartinezRouting.Styles.Pages
+ */
+
+@use "sass:color";
+@use '../abstracts' as *;
+
+// Contenedor envolvente del lienzo completo de login (Centrado ortogonal absoluto)
+.login-view-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg-dark;
+  // Gradiente radial perimetral para generar profundidad táctica de software industrial
+  background-image: 
+    radial-gradient(circle at 15% 20%, alpha-surface($time-blue, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, alpha-surface($time-cyan, 0.03) 0%, transparent 45%);
+  padding: $space-xl;
+  font-family: $font-text;
+}
+
+// Contenedor de la tarjeta principal de autenticación
+.login-card-container {
+  background-color: $bg-surface;
+  border: 1px solid alpha-surface($border-color, 0.8);
+  border-radius: $radius-xl;
+  padding: $space-3xl;
+  width: 100%;
+  max-width: rem(440);
+  box-shadow: 0 rem(24) rem(64) rem(-16) rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  transition: border-color $motion-normal ease;
+
+  &:focus-within {
+    border-color: alpha-surface($time-cyan, 0.35);
+  }
+
+  // Encabezado modular con el branding de la plataforma
+  &__header {
+    text-align: center;
+    
+    .brand-title {
+      font-family: $font-headings;
+      font-size: rem(26);
+      font-weight: 800;
+      color: $white-smoke;
+      letter-spacing: rem(-0.75);
+      margin: 0;
+      
+      span {
+        color: $time-cyan;
+        font-weight: 900;
+        text-shadow: 0 0 rem(15) alpha-surface($time-cyan, 0.2);
+      }
+    }
+
+    .brand-subtitle {
+      font-size: rem(13.5);
+      color: $text-muted;
+      margin: $space-sm 0 0 0;
+      font-weight: 400;
+    }
+  }
+
+  // Formulario operativo interno
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xl;
+  }
+}
+
+// Bloques de campos de entrada tácticos
+.form-group-login {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+
+  &__label {
+    font-size: rem(11.5);
+    font-weight: 700;
+    color: $text-main;
+    letter-spacing: rem(0.75);
+    text-transform: uppercase;
+  }
+
+  &__input {
+    background-color: $bg-surface-soft;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    padding: $space-md $space-lg;
+    color: $white-smoke;
+    font-family: $font-text;
+    font-size: rem(14.5);
+    transition: all $motion-fast ease;
+
+    &::placeholder {
+      color: $text-disabled;
+    }
+
+    &:focus {
+      outline: none;
+      background-color: color.adjust($bg-surface-soft, $lightness: 2%);
+      border-color: $time-cyan;
+      box-shadow: 0 0 0 rem(3) alpha-surface($time-cyan, 0.15);
+    }
+  }
+}
+
+// Botón de validación criptográfica perimetral
+.btn-login-submit {
+  @include btn-base;
+  background-color: $time-blue;
+  color: $white-smoke;
+  padding: $space-md;
+  font-size: rem(14);
+  font-weight: 700;
+  border-radius: $radius-md;
+  width: 100%;
+  margin-top: $space-sm;
+  box-shadow: 0 rem(4) rem(12) alpha-surface($time-blue, 0.25);
+  transition: all $motion-fast ease;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($time-blue, $lightness: 4%);
+    box-shadow: 0 rem(6) rem(20) alpha-surface($time-blue, 0.35);
+    transform: translateY(rem(-1));
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background-color: $bg-surface-soft;
+    color: $text-disabled;
+    border-color: $border-color;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Panel interactivo de control de errores (Clases inyectadas por LoginController)
+#login-error-msg {
+  background-color: alpha-surface($time-red, 0.08);
+  border: 1px solid alpha-surface($time-red, 0.35);
+  color: color.adjust($time-red, $lightness: 8%);
+  padding: $space-md $space-lg;
+  border-radius: $radius-md;
+  font-size: rem(13.5);
+  font-weight: 500;
+  line-height: 1.45;
+  
+  &.error-message-panel--hidden {
+    display: none;
+    opacity: 0;
+  }
+  
+  &.error-message-panel--visible {
+    display: block;
+    opacity: 1;
+    animation: login-shake-error 0.45s cubic-bezier(.36,.07,.19,.97) both;
+  }
+}
+
+// Animación táctica estructural para alertar errores de firmas de credenciales
+@keyframes login-shake-error {
+  10%, 90% { transform: translate3d(rem(-1), 0, 0); }
+  20%, 80% { transform: translate3d(rem(2), 0, 0); }
+  30%, 50%, 70% { transform: translate3d(rem(-4), 0, 0); }
+  40%, 60% { transform: translate3d(rem(4), 0, 0); }
+}

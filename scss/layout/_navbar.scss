@@ -1,0 +1,88 @@
+@use "sass:color";
+@use '../abstracts' as *;
+
+.app-header {
+  background-color: $bg-surface;
+  border-bottom: 1px solid $border-color;
+  min-height: rem(70);
+  display: flex;
+  align-items: center;
+  padding: 0 $space-2xl;
+  position: relative;
+  z-index: 100;
+}
+
+.app-navbar {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  align-items: center;
+  width: 100%;
+
+  @include respond-to('md') {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .brand-title {
+    color: $white-smoke;
+    font-size: rem(18);
+    font-weight: 700;
+    letter-spacing: rem(0.5);
+    white-space: nowrap;
+  }
+
+  // Soporta ambos nombres de clase para evitar conflictos con los controllers de JS
+  .nav-links-group,
+  .dashboard-counters {
+    display: flex;
+    gap: $space-xs;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a.nav-link {
+      text-decoration: none;
+      @include btn-base;
+      padding: $space-sm $space-lg;
+      font-size: rem(13.5);
+      color: $text-muted;
+
+      &:hover {
+        color: $text-main;
+        background-color: alpha-surface($bg-surface-soft, 0.5);
+      }
+
+      &.nav-link--active {
+        background-color: alpha-surface($time-blue, 0.12) !important;
+        color: $time-blue !important;
+        border: 1px solid alpha-surface($time-blue, 0.3);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.user-profile-status {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  font-size: rem(13);
+  color: $text-muted;
+
+  .status-indicator {
+    width: rem(8);
+    height: rem(8);
+    border-radius: 50%;
+    
+    &--active {
+      background-color: $time-green;
+      box-shadow: 0 0 rem(8) $time-green;
+    }
+  }
+
+  .user-name {
+    color: $text-main;
+    font-weight: 500;
+  }
+}

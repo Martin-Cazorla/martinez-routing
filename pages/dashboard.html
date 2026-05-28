@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinez Routing - Panel de Carga Operativa</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body class="layout-app">
+
+    <header class="app-header">
+        <nav class="app-navbar" aria-label="Navegación del centro de despacho e inyección">
+            <div class="brand-title">Martinez Routing Dashboard</div>
+            <div class="dashboard-counters" role="menubar">
+                <a href="../index.html" class="nav-link" role="menuitem">Inicio</a>
+                <a href="dashboard.html" class="nav-link nav-link--active" role="menuitem" aria-current="page">Panel de Carga</a>
+                <a href="shipping.html" class="nav-link" role="menuitem">Consola Mapa</a>
+                <a href="transporte.html" class="nav-link" role="menuitem">Flota</a>
+                <a href="clientes.html" class="nav-link" role="menuitem">Clientes</a>
+                <a href="administracion.html" class="nav-link" role="menuitem">Seguridad</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="filter-bar" role="toolbar" aria-label="Filtro global de control de jornada cronológica">
+        <div class="filter-group">
+            <label for="global-date-filter"><strong>Jornada Operativa de Control:</strong></label>
+            <input type="date" id="global-date-filter" class="date-picker-custom" aria-required="true" onclick="this.showPicker()">
+        </div>
+    </div>
+
+    <main class="layout-main">
+        <div class="tab-container">
+            
+            <div class="tab-list" role="tablist" aria-label="Secciones de monitoreo operacional">
+                <button id="tab-unidades" class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-unidades">Control de Unidades</button>
+                <button id="tab-pedidos" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-pedidos">Pedidos de la Jornada</button>
+                <button id="tab-reclamos" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-reclamos">Gestión de Reclamos</button>
+            </div>
+
+            <section id="panel-unidades" class="tab-panel active" role="tabpanel" aria-labelledby="tab-unidades">
+                <div class="search-express-bar">
+                    <div class="express-inputs-group">
+                        <label for="input-express-unidad" class="screen-reader-only">Código o chofer de la unidad táctica:</label>
+                        <input type="text" id="input-express-unidad" class="form-enterprise__input" placeholder="INGRESÁ ID UNIDAD O CHOFER + ENTER">
+                        
+                        <label for="select-express-ingreso" class="screen-reader-only">Ventana de asignación por planilla:</label>
+                        <select id="select-express-ingreso" class="form-enterprise__input">
+                            <option value="09:00 hs">Ingreso: 09:00 hs</option>
+                            <option value="10:00 hs">Ingreso: 10:00 hs</option>
+                            <option value="11:00 hs">Ingreso: 11:00 hs</option>
+                            <option value="Electro">Ingreso: Electro</option>
+                            <option value="Ausente">Ingreso: Ausente / Franco</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="dashboard-counters" role="region" aria-label="Indicadores de flota activa para la fecha" aria-live="polite">
+                    <span class="badge badge--info">Unidades Activas: <strong id="count-total">0</strong></span>
+                    <span class="badge badge--success">En Vuelta: <strong id="count-disp">0</strong></span>
+                    <span class="badge badge--danger">En Horas Extra: <strong id="count-extra">0</strong></span>
+                </div>
+
+                <div id="unidades-secciones-container" class="form-vertical-stack"></div>
+            </section>
+
+            <section id="panel-pedidos" class="tab-panel" role="tabpanel" aria-labelledby="tab-pedidos" hidden>
+                <div class="grid-two-columns">
+                    <div class="card-panel">
+                        <h3 class="section-title">Inyección Masiva (Planillas Jumbo)</h3>
+                        <div class="upload-box">
+                            <label for="excel-file" class="custom-file-upload">📁 Seleccionar Archivo .xlsx / .csv</label>
+                            <input type="file" id="excel-file" accept=".xlsx, .xls, .csv" />
+                            <span id="file-name-display" aria-live="polite" class="file-name-display">Ningún archivo seleccionado</span>
+                        </div>
+                        <button id="btn-procesar-carga" class="btn-primary-lg" disabled>Iniciar Inyección a Firestore</button>
+                        
+                        <hr class="separator" aria-hidden="true">
+                        
+                        <h3 class="section-title">Carga Manual Ajustada</h3>
+                        <button id="btn-manual-pedido-modal" class="btn-secondary-action w-100-btn">Apertura Formulario de Pedido</button>
+                    </div>
+
+                    <div class="card-panel">
+                        <h3 class="section-title">Órdenes del Día</h3>
+                        <div class="search-box">
+                            <label for="search-pedido" class="screen-reader-only">Buscar por número de orden o DNI:</label>
+                            <input type="search" id="search-pedido" class="form-enterprise__input" placeholder="Buscar por número de orden o DNI...">
+                        </div>
+                        <div id="listado-pedidos" class="list-scroll-box"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="panel-reclamos" class="tab-panel" role="tabpanel" aria-labelledby="tab-reclamos" hidden>
+                <div class="grid-two-columns">
+                    <div class="card-panel">
+                        <h3 class="section-title">Ingreso de Reclamo Operativo</h3>
+                        <form id="form-reclamo" class="form-enterprise">
+                            <div class="form-enterprise__group">
+                                <label for="rec-dni" class="form-enterprise__label">DNI del Cliente afectado:</label>
+                                <input type="text" id="rec-dni" class="form-enterprise__input" placeholder="Presione Enter para buscar..." required>
+                                <span id="rec-cliente-status" class="status-indicator" aria-live="polite"></span>
+                            </div>
+                            <div class="form-enterprise__group">
+                                <label for="rec-direccion" class="form-enterprise__label">Seleccionar Dirección del Incidente:</label>
+                                <select id="rec-direccion" class="form-enterprise__input" required disabled>
+                                    <option value="">Ingrese primero un DNI válido</option>
+                                </select>
+                            </div>
+                            <div class="form-enterprise__group">
+                                <label for="rec-descripcion" class="form-enterprise__label">Descripción del Problema (Alerta Fuego):</label>
+                                <textarea id="rec-descripcion" class="form-enterprise__input" rows="4" placeholder="Detalle el motivo del reclamo..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-danger-action w-100-btn">Cargar Reclamo y Activar Alerta Crítica</button>
+                        </form>
+                    </div>
+                    <div class="card-panel">
+                        <h3 class="section-title">Historial de Alertas Activas</h3>
+                        <div id="listado-reclamos" class="list-scroll-box"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="modal-pedido" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-pedido-title">
+        <div class="modal-base-refinado">
+            <div class="modal-content-wrapper">
+                <header class="modal-header-nav">
+                    <h3 id="modal-pedido-title">Formulario de Creación de Orden</h3>
+                    <button class="btn-close-modal btn-close-x" aria-label="Cerrar ventana de orden">&times;</button>
+                </header>
+                <form id="form-manual-pedido" class="form-enterprise">
+                    <div class="form-enterprise__group">
+                        <label for="p-dni" class="form-enterprise__label">DNI del Cliente:</label>
+                        <div class="search-input-inline">
+                            <input type="text" id="p-dni" class="form-enterprise__input" placeholder="Buscar cliente..." required>
+                            <button type="button" id="btn-verificar-dni" class="btn-secondary-action">Validar DNI</button>
+                        </div>
+                    </div>
+                    <div id="domicilios-select-group" class="form-enterprise__group" style="display:none;">
+                        <label for="p-direccion-select" class="form-enterprise__label">Seleccionar Domicilio Registrado:</label>
+                        <select id="p-direccion-select" class="form-enterprise__input"></select>
+                    </div>
+                    <div id="domicilio-nuevo-group" class="form-enterprise__group">
+                        <label for="p-direccion-nueva" class="form-enterprise__label">Dirección de Entrega (Nueva / Única):</label>
+                        <input type="text" id="p-direccion-nueva" class="form-enterprise__input" placeholder="Calle, Altura, Localidad">
+                    </div>
+                    <div class="grid-form-row">
+                        <div class="form-enterprise__group">
+                            <label for="p-numero" class="form-enterprise__label">Nº Pedido (Jumbo):</label>
+                            <input type="text" id="p-numero" class="form-enterprise__input" required>
+                        </div>
+                        <div class="form-enterprise__group">
+                            <label for="p-importe" class="form-enterprise__label">Importe ($):</label>
+                            <input type="number" id="p-importe" step="0.01" class="form-enterprise__input" required>
+                        </div>
+                    </div>
+                    <div class="form-enterprise__group">
+                        <label for="p-franja" class="form-enterprise__label">Ventana Horaria Asignada:</label>
+                        <select id="p-franja" class="form-enterprise__input" required>
+                            <option value="10:00-14:00">Mañana (10:00 - 14:00)</option>
+                            <option value="13:00-16:00">Mediodía (13:00 - 16:00)</option>
+                            <option value="16:00-19:00">Tarde (16:00 - 19:00)</option>
+                            <option value="19:00-21:30">Nocturno (19:00 - 21:30)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary-lg">Inyectar Pedido Manual</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <dialog id="modal-gestion-unidad" class="modal-base-refinado" aria-labelledby="modal-interno-display-title">
+        <div class="modal-content-wrapper">
+            <header class="modal-header-nav">
+                <h3 id="modal-interno-display-title">Gestión Unidad: <span id="modal-interno-display">--</span></h3>
+                <button id="btn-close-gestion-dialog" class="btn-close-x" aria-label="Cerrar panel de control de unidad">&times;</button>
+            </header>
+            <div class="modal-body-form">
+                <div class="form-enterprise__group">
+                    <label for="modal-notes-area" class="form-enterprise__label">Observaciones de la Jornada Logística:</label>
+                    <textarea id="modal-notes-area" class="form-enterprise__input" rows="3" placeholder="Escriba novedades aquí..."></textarea>
+                </div>
+                <div class="banner-extra-toggle-box">
+                    <label class="checkbox-interactive-label">
+                        <input type="checkbox" id="modal-checkbox-force-extra">
+                        <span>FORZAR COMPENSACIÓN / VUELTA EXTRA</span>
+                    </label>
+                    <p class="sub-alert-text">* Al marcarlo, computará horas extra directo en los KPI superiores sin importar las vueltas realizadas.</p>
+                </div>
+            </div>
+            <footer class="modal-actions-footer">
+                <button id="btn-finalizar-jornada-unidad" class="btn-danger-action">FINALIZAR JORNADA UNIDAD</button>
+                <button id="btn-save-gestion-dialog" class="btn-save-action">GUARDAR CAMBIOS</button>
+            </footer>
+        </div>
+    </dialog>
+
+    <script type="module" src="../js/controllers/dashboardController.js"></script>
+</body>
+</html>

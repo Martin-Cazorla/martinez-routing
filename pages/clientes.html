@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martinez Routing - Fichero Maestro de Clientes</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="layout-app">
+
+    <header class="app-header">
+        <nav class="app-navbar" aria-label="Navegación del maestro de cuentas">
+            <div class="brand-title">Martinez Routing Clientes</div>
+            <div class="dashboard-counters" role="menubar">
+                <a href="../index.html" class="nav-link" role="menuitem">Inicio</a>
+                <a href="dashboard.html" class="nav-link" role="menuitem">Panel de Carga</a>
+                <a href="shipping.html" class="nav-link" role="menuitem">Consola Mapa</a>
+                <a href="transporte.html" class="nav-link" role="menuitem">Flota</a>
+                <a href="clientes.html" class="nav-link nav-link--active" role="menuitem" aria-current="page">Clientes</a>
+                <a href="administracion.html" class="nav-link" role="menuitem">Seguridad</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="layout-main">
+        <div class="grid-two-columns">
+            
+            <section class="card-panel" aria-labelledby="form-clientes-title">
+                <h2 id="form-clientes-title" class="section-title">Registro Maestro de Clientes</h2>
+                
+                <form id="form-cliente-operativo" class="form-enterprise">
+                    <input type="hidden" id="cliente-id-hidden">
+
+                    <div class="form-enterprise__group">
+                        <label for="c-dni" class="form-enterprise__label">Documento Nacional de Identidad (DNI):</label>
+                        <input type="text" id="c-dni" class="form-enterprise__input" placeholder="Ej: 35123456" required autocomplete="off">
+                    </div>
+
+                    <div class="form-enterprise__group">
+                        <label for="c-nombre" class="form-enterprise__label">Nombre Completo o Razón Social:</label>
+                        <input type="text" id="c-nombre" class="form-enterprise__input" placeholder="Ej: Juan Pérez" required autocomplete="off">
+                    </div>
+
+                    <div class="form-enterprise__group">
+                        <label for="c-telefono" class="form-enterprise__label">Teléfono de Contacto (Alertas SMS):</label>
+                        <input type="tel" id="c-telefono" class="form-enterprise__input" placeholder="Ej: 1123456789" required autocomplete="off">
+                    </div>
+
+                    <div class="form-enterprise__group">
+                        <label for="c-direccion" class="form-enterprise__label">Dirección Estructurada de Entrega:</label>
+                        <input type="text" id="c-direccion" class="form-enterprise__input" placeholder="Calle, Altura, Localidad (Martinez)" required autocomplete="off">
+                    </div>
+
+                    <fieldset class="form-enterprise__fieldset group-segmentacion-tactica">
+                        <legend class="form-enterprise__legend">Segmentación de Cuenta</legend>
+                        
+                        <label class="form-enterprise__checkbox-row">
+                            <input type="checkbox" id="c-is-premium" class="form-enterprise__checkbox">
+                            <span class="form-enterprise__checkbox-text">⭐ Cuenta Cliente Premium (Alta Prioridad / Corporativo)</span>
+                        </label>
+
+                        <label class="form-enterprise__checkbox-row">
+                            <input type="checkbox" id="c-is-critico" class="form-enterprise__checkbox">
+                            <span class="form-enterprise__checkbox-text">⚠️ Cuenta Cliente Crítico (Historial de Reclamos / Faltantes)</span>
+                        </label>
+                    </fieldset>
+
+                    <div class="form-enterprise__actions">
+                        <button type="submit" id="btn-guardar-cliente" class="btn-primary-lg">Guardar Cliente en Base</button>
+                        <button type="button" id="btn-cancelar-edicion" class="btn-secondary-action">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card-panel" aria-labelledby="lista-clientes-title">
+                <h2 id="lista-clientes-title" class="section-title">Fichero Base de Clientes</h2>
+                
+                <div class="search-box search-box--sticky">
+                    <label for="search-cliente" class="screen-reader-only">Filtrar registros de clientes:</label>
+                    <input type="search" id="search-cliente" class="form-enterprise__input" placeholder="🔍 Filtrar por DNI, Nombre o Dirección en tiempo real...">
+                </div>
+
+                <div id="listado-master-clientes" class="list-scroll-box list-scroll-box--crm" role="region" aria-live="polite" aria-busy="false">
+                    </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script type="module" src="../js/controllers/clientesController.js"></script>
+</body>
+</html>
