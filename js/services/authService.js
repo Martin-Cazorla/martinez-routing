@@ -1,7 +1,7 @@
 /**
  * @fileoverview Servicio unificado de control de sesiones e integridad de identidad operativa.
  * Abstrae y securiza los canales de validación del SDK perimetral de Firebase Auth.
- * @version 3.0.0
+ * @version 3.1.0
  * @package MartinezRouting.Services
  */
 
@@ -18,15 +18,31 @@ export class AuthService {
         return onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
-                    // Verificación secundaria cruzada de perfiles sobre Firestore corporativo
-                    const { doc, getDoc } = await import("https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js");
+                    // Carga modular asíncrona de las dependencias nativas de Firestore
+                    const { doc, getDoc, collection, query, where, getDocs } = await import("https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js");
                     const { db } = await import('./firebaseConfig.js');
 
-                    const profileDoc = await getDoc(doc(db, "usuarios", user.uid));
-                    
-                    if (profileDoc.exists() && profileDoc.data().activo !== false) {
-                        // Enriquecemos el payload del objeto nativo con las flags del CRM
-                        const profileData = profileDoc.data();
+                    let profileData = null;
+
+                    // Estrategia 1: Búsqueda indexada directa por ID de documento (= UID)
+                    const directDocRef = doc(db, "usuarios", user.uid);
+                    const directDocSnap = await getDoc(directDocRef);
+
+                    if (directDocSnap.exists()) {
+                        profileData = directDocSnap.data();
+                    } else {
+                        // Estrategia 2: Búsqueda fallback por atributo interno en caso de ID automático
+                        const usuariosRef = collection(db, "usuarios");
+                        const q = query(usuariosRef, where("uid", "==", user.uid));
+                        const querySnapshot = await getDocs(q);
+                        
+                        if (!querySnapshot.empty) {
+                            profileData = querySnapshot.docs[0].data();
+                        }
+                    }
+
+                    // Validación del ciclo de vida y políticas operativas del perfil obtenido
+                    if (profileData && profileData.activo !== false) {
                         callback({
                             uid: user.uid,
                             email: user.email,
@@ -35,8 +51,7 @@ export class AuthService {
                             isMaster: profileData.rol === 'admin'
                         });
                     } else {
-                        // Forzado inmediato de expulsión si la cuenta fue revocada administrativamente
-                        console.warn("[AuthService] Intento de intrusión por cuenta deshabilitada.");
+                        console.warn("[AuthService] Acceso denegado: Operador inexistente o suspendido.");
                         await this.cerrarSesionTerminal();
                         callback(null);
                     }
@@ -51,15 +66,14 @@ export class AuthService {
     }
 
     /**
-     * Destruye de forma persistente la firma de sesión y limpia las cookies del navegador.
-     * @returns {Promise<void>} Promesa síncrona de desconexión del servidor.
+     * Destruye de forma de red la firma de sesión y limpia los búferes locales.
+     * @returns {Promise<void>}
      */
     static async cerrarSesionTerminal() {
         try {
             console.log("🔒 Solicitando erradicación de credenciales perimetrales en servidor...");
             await signOut(auth);
             
-            // Forzado de redirección adaptativa absoluta para evitar retención de trazas en memoria
             const isInsidePages = window.location.pathname.includes('/pages/');
             window.location.href = isInsidePages ? 'login.html' : 'pages/login.html';
         } catch (error) {
