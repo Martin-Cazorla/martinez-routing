@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Fichero componente de filtros, badges semánticos y barras de herramientas de alta densidad.
+ * Soluciona obsolescencias de funciones cromáticas de color e integra Dart Sass 3.0.0 de forma estricta.
+ * @version 3.2.2
+ * @package MartinezRouting.Styles.Components
+ */
+
+@use "sass:color";
 @use '../abstracts' as *;
 
 .section-header {
@@ -21,7 +29,7 @@
   flex-wrap: wrap;
 }
 
-// Etiquetas de Estado de Alta Visibilidad Profesional
+// Etiquetas de Estado de Alta Visibilidad (Corregidas con color.adjust para Dart Sass)
 .badge {
   padding: $space-sm $space-xl;
   border-radius: rem(20);
@@ -36,31 +44,31 @@
   &--info {
     background-color: alpha-surface($time-blue, 0.12);
     border: 1px solid alpha-surface($time-blue, 0.25);
-    color: lighten($time-blue, 10%);
+    color: color.adjust($time-blue, $lightness: 10%);
   }
 
   &--success {
     background-color: alpha-surface($time-green, 0.12);
     border: 1px solid alpha-surface($time-green, 0.25);
-    color: lighten($time-green, 10%);
+    color: color.adjust($time-green, $lightness: 10%);
   }
 
   &--danger {
     background-color: alpha-surface($time-red, 0.12);
     border: 1px solid alpha-surface($time-red, 0.25);
-    color: lighten($time-red, 10%);
+    color: color.adjust($time-red, $lightness: 10%);
   }
 
   &--premium {
     background-color: alpha-surface($premium-purple, 0.12);
     border: 1px solid alpha-surface($premium-purple, 0.25);
-    color: lighten($premium-purple, 10%);
+    color: color.adjust($premium-purple, $lightness: 10%);
   }
 
   &--critico {
     background-color: alpha-surface($alert-fire, 0.12);
     border: 1px solid alpha-surface($alert-fire, 0.25);
-    color: lighten($alert-fire, 10%);
+    color: color.adjust($alert-fire, $lightness: 10%);
   }
 
   strong {
@@ -68,14 +76,17 @@
   }
 }
 
-// Barra de filtrado táctico
+// Barra de filtrado táctico y fichas modulares unificadas
 .filter-bar {
-  background-color: $bg-surface;
-  border-bottom: 1px solid $border-color;
-  padding: $space-lg $space-2xl;
   display: flex;
+  gap: $space-sm;
+  background-color: $bg-surface;
+  padding: $space-md;
+  border-radius: $radius-lg;
+  border: 1px solid $border-color;
   align-items: center;
 
+  // Preservación del grupo estructurado preexistente
   .filter-group {
     display: flex;
     align-items: center;
@@ -86,6 +97,46 @@
       font-size: rem(14);
       font-weight: 500;
     }
+  }
+}
+
+// Chips de control dinámico integrados
+.filter-chip {
+  padding: $space-xs $space-md;
+  border-radius: $radius-sm;
+  font-size: rem(12);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $motion-fast ease;
+
+  &--blue {
+    background-color: alpha-surface($time-blue, 0.1);
+    color: color.adjust($time-blue, $lightness: 10%);
+    border: 1px solid alpha-surface($time-blue, 0.2);
+  }
+
+  &--green {
+    background-color: alpha-surface($time-green, 0.1);
+    color: color.adjust($time-green, $lightness: 10%);
+    border: 1px solid alpha-surface($time-green, 0.2);
+  }
+
+  &--red {
+    background-color: alpha-surface($time-red, 0.1);
+    color: color.adjust($time-red, $lightness: 10%);
+    border: 1px solid alpha-surface($time-red, 0.2);
+  }
+
+  &--purple {
+    background-color: alpha-surface($premium-purple, 0.1);
+    color: color.adjust($premium-purple, $lightness: 10%);
+    border: 1px solid alpha-surface($premium-purple, 0.2);
+  }
+
+  &--fire {
+    background-color: alpha-surface($alert-fire, 0.1);
+    color: color.adjust($alert-fire, $lightness: 10%);
+    border: 1px solid alpha-surface($alert-fire, 0.2);
   }
 }
 

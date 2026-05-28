@@ -1,136 +1,136 @@
 /**
- * @fileoverview Hoja de estilos específica para la pasarela de acceso y Login Terminal.
- * Diseña la interfaz inmersiva oscura alineada con las directivas de Martinez Routing.
- * @version 3.2.1
+ * @fileoverview Rediseño premium inmersivo para la Terminal de Acceso.
+ * Implementa interfaces oscuras corporativas avanzadas de alta densidad.
+ * @version 3.3.0
  * @package MartinezRouting.Styles.Pages
  */
 
 @use "sass:color";
 @use '../abstracts' as *;
 
-// Contenedor envolvente del lienzo completo de login (Centrado ortogonal absoluto)
 .login-view-wrapper {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $bg-dark;
+  background-color: #0b0f19; // Fondo ultra oscuro Slate premium
   background-image: 
-    radial-gradient(circle at 15% 20%, alpha-surface($time-blue, 0.04) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, alpha-surface($time-cyan, 0.03) 0%, transparent 45%);
+    radial-gradient(circle at 10% 15%, rgba(30, 64, 175, 0.07) 0%, transparent 50%),
+    radial-gradient(circle at 90% 85%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
   padding: $space-xl;
   font-family: $font-text;
 }
 
-// Contenedor de la tarjeta principal de autenticación
 .login-card-container {
-  background-color: $bg-surface;
-  border: 1px solid alpha-surface($border-color, 0.8);
-  border-radius: $radius-xl;
-  padding: $space-3xl;
+  background-color: #111827; // Superficie contrastada limpia
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.08); // Efecto sutil de iluminación superior
+  border-radius: rem(16);
+  padding: rem(40) rem(44);
   width: 100%;
-  max-width: rem(440);
-  box-shadow: 0 rem(24) rem(64) rem(-16) rgba(0, 0, 0, 0.65);
+  max-width: rem(420);
+  box-shadow: 
+    0 rem(4) rem(6) rem(-1) rgba(0, 0, 0, 0.1),
+    0 rem(20) rem(40) rem(-4) rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  gap: $space-2xl;
-  transition: border-color $motion-normal ease;
+  gap: rem(28);
+  transition: border-color $motion-normal cubic-bezier(0.4, 0, 0.2, 1);
 
   &:focus-within {
-    border-color: alpha-surface($time-cyan, 0.35);
+    border-color: rgba(6, 182, 212, 0.3);
   }
 
-  // Encabezado modular con el branding de la plataforma
   &__header {
     text-align: center;
     
     .brand-title {
       font-family: $font-headings;
-      font-size: rem(26);
+      font-size: rem(24);
       font-weight: 800;
-      color: $white-smoke;
-      letter-spacing: rem(-0.75);
+      color: #f3f4f6;
+      letter-spacing: rem(-0.5);
       margin: 0;
       
       span {
-        color: $time-cyan;
+        color: #22d3ee; // Cyan corporativo satinado
         font-weight: 900;
-        text-shadow: 0 0 rem(15) alpha-surface($time-cyan, 0.2);
+        margin-left: rem(1);
       }
     }
 
     .brand-subtitle {
-      font-size: rem(13.5);
-      color: $text-muted;
-      margin: $space-sm 0 0 0;
+      font-size: rem(13);
+      color: #9ca3af;
+      margin-top: rem(8);
       font-weight: 400;
+      letter-spacing: rem(0.2);
     }
   }
 
-  // Formulario operativo interno
   &__form {
     display: flex;
     flex-direction: column;
-    gap: $space-xl;
+    gap: rem(20);
   }
 }
 
-// Bloques de campos de entrada tácticos (Alineados con login.html)
+// Bloques específicos de control de inputs (Unificados con login.html)
 .form-group-login {
   display: flex;
   flex-direction: column;
-  gap: $space-xs;
+  gap: rem(6);
 
   &__label {
     font-size: rem(11.5);
     font-weight: 700;
-    color: $text-main;
-    letter-spacing: rem(0.75);
+    color: #9ca3af;
+    letter-spacing: rem(0.5);
     text-transform: uppercase;
-    margin-bottom: rem(2);
   }
 
   &__input {
-    background-color: $bg-surface-soft;
-    border: 1px solid $border-color;
-    border-radius: $radius-md;
-    padding: $space-md $space-lg;
-    color: $white-smoke;
+    background-color: #1f2937; // Input integrado profundo
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: rem(8);
+    padding: rem(11) rem(14);
+    color: #f9fafb;
     font-family: $font-text;
-    font-size: rem(14.5);
+    font-size: rem(14);
     transition: all $motion-fast ease;
     width: 100%;
 
     &::placeholder {
-      color: $text-disabled;
+      color: #4b5563;
     }
 
     &:focus {
       outline: none;
-      background-color: color.adjust($bg-surface-soft, $lightness: 2%);
-      border-color: $time-cyan;
-      box-shadow: 0 0 0 rem(3) alpha-surface($time-cyan, 0.15);
+      border-color: #06b6d4;
+      background-color: #1f2937;
+      box-shadow: 0 0 0 rem(3) rgba(6, 182, 212, 0.12);
     }
   }
 }
 
-// Botón de validación criptográfica perimetral
 .btn-login-submit {
   @include btn-base;
-  background-color: $time-blue;
-  color: $white-smoke;
-  padding: $space-md;
+  background-color: #2563eb; // Azul sólido enterprise unificado
+  color: #ffffff;
+  padding: rem(12);
   font-size: rem(14);
-  font-weight: 700;
-  border-radius: $radius-md;
+  font-weight: 600;
+  border-radius: rem(8);
   width: 100%;
-  margin-top: $space-sm;
-  box-shadow: 0 rem(4) rem(12) alpha-surface($time-blue, 0.25);
+  margin-top: rem(8);
+  box-shadow: 0 rem(4) rem(12) rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all $motion-fast ease;
+  cursor: pointer;
 
   &:hover:not(:disabled) {
-    background-color: color.adjust($time-blue, $lightness: 4%);
-    box-shadow: 0 rem(6) rem(20) alpha-surface($time-blue, 0.35);
+    background-color: #3b82f6;
+    box-shadow: 0 rem(6) rem(20) rgba(37, 99, 235, 0.35);
     transform: translateY(rem(-1));
   }
 
@@ -139,25 +139,24 @@
   }
 
   &:disabled {
-    background-color: $bg-surface-soft;
-    color: $text-disabled;
-    border-color: $border-color;
+    background-color: #1f2937;
+    color: #4b5563;
+    border-color: rgba(255, 255, 255, 0.05);
     box-shadow: none;
     cursor: not-allowed;
     transform: none;
   }
 }
 
-// Panel interactivo de control de errores
 #login-error-msg {
-  background-color: alpha-surface($time-red, 0.08);
-  border: 1px solid alpha-surface($time-red, 0.35);
-  color: color.adjust($time-red, $lightness: 8%);
-  padding: $space-md $space-lg;
-  border-radius: $radius-md;
-  font-size: rem(13.5);
+  background-color: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #f87171;
+  padding: rem(10) rem(14);
+  border-radius: rem(8);
+  font-size: rem(13);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.4;
   
   &.error-message-panel--hidden {
     display: none;

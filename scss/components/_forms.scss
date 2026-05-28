@@ -1,7 +1,7 @@
 /**
- * @fileoverview Componente de formularios y pasarela de acceso (Login UI Grid).
- * Implementa las directivas oscuras semánticas del Design System corporativo.
- * @version 3.1.0
+ * @fileoverview Fichero componente de formularios, campos de texto y elementos de control.
+ * Asegura el acoplamiento tipográfico, la pasarela de acceso y el blindaje del Design System.
+ * @version 3.2.2
  * @package MartinezRouting.Styles.Components
  */
 
@@ -64,30 +64,28 @@
   }
 }
 
-// Bloques de control y labels flotantes de alta densidad
+// Bloques de control e inputs técnicos (Actualizado a versión 3.2.2 con blindaje de abstracts)
 .form-group-panel {
   display: flex;
   flex-direction: column;
-  gap: $space-sm;
+  gap: $space-xs;
+  margin-bottom: $space-md;
   position: relative;
 
   &__label {
-    font-size: rem(12.5);
+    font-size: rem(13);
     font-weight: 600;
     color: $text-main;
-    letter-spacing: rem(0.3);
-    text-transform: uppercase;
   }
 
-  // Input de datos técnicos con consistencia cromática slate
   &__input {
     background-color: $bg-surface-soft;
     border: 1px solid $border-color;
     border-radius: $radius-md;
-    padding: $space-md $space-lg;
+    padding: $space-md;
     color: $white-smoke;
     font-family: $font-text;
-    font-size: rem(14.5);
+    font-size: rem(14);
     transition: all $motion-fast ease;
 
     &::placeholder {
@@ -98,7 +96,7 @@
       outline: none;
       background-color: color.adjust($bg-surface-soft, $lightness: 2%);
       border-color: $time-cyan;
-      box-shadow: 0 0 0 rem(3) alpha-surface($time-cyan, 0.15);
+      box-shadow: 0 0 0 rem(2) alpha-surface($time-cyan, 0.15);
     }
   }
 }
